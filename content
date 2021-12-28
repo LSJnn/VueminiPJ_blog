@@ -1,0 +1,54 @@
+1. bootstrap: html 기본 구조 라이브러리
+    1) npm install bootstrap@next @popperjs/core
+    2) main.js 에
+        import 'bootstrap'
+        import 'bootstrap/dist/css/bootstrap.min.css'
+        추가
+    3) bootstrap 홈페이지에서 검색 후 넣기
+
+2. 링크따라 페이지 변화 : vue-router 필요
+    1) npm install vue-router@4
+    2) main.js 에서 라우터 사용 설정 필요.
+        - src/router.js 생성
+                => url 파라미터 문법 - /:작명 -> 뭐가 오든 해당 페이지로 이동.
+        - main.js 에 import 후 use
+            createApp(App).use(router).mount('#app')
+        -원하는 위치에
+            <router-view></> 작성.
+            or
+            <router-link to></> : 링크 영ㄴ결 가능
+3. router 파라미터
+    router.js 에서 설정한 파라미터는
+    $router 에 저장되어있음.
+    $router.params.변수명으로 url 번호 값 확인 가능.
+
+    //"/detail/:id(//d+)", 이런식으로 rㄴuter 파라ㅣㅁ터 정규식 가능
+    // :id * 인 경우 다중 파라미터 자동.
+
+4. $route : 현재 경로
+   $router : 페이지 이동 관련 기능
+        $router.push(이동경로)
+
+   +) named views 방식 => 조립식 뷰.
+   {} 내에 컴포넌트 추가
+
+   +) redirection
+   https://router.vuejs.org/kr/
+
+   +)hash 모드 -> 중간에 서버가 가로챌 걱정 없음 == 서버가 필요없을때
+    router.js : history : createWebHashHistory(), 로 = hash 모드
+    localhost:8080/#/````` 로 시작됨. #이후 내용 서버전달 안됨.
+
+    +)네비게이션 가드 : 요청페이지로 라우팅되기 전에 작업 실행
+        router.js에 해당 {} 아래에 beforeEnter 함수 작업
+            -> 익명함수 = return url
+            -> beforeEnter: (to,from)=>{
+                return to.fullpath; //return false: 라우팅 중단
+                }
+    +) 다수의 route에 동일한 navigation guard 추가 원하는 경우
+        : router = createRouter({})
+          router.beforeEach((to,from)=>{})
+                ---- beforeEach/beforeResolve/afterEach
+
+    +) vue 컴포넌트 내 navigation guard
+        : hooks 와 동일하게 사용

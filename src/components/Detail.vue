@@ -14,7 +14,10 @@ export default {
   name: "Detail",
   props:{
     blog : Array,
-
+  },
+  data(){
+    return{
+    }
   }
 }
 </script>

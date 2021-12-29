@@ -1,55 +1,35 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Vuelog</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              글만들기
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">글 작성</a></li>
-              <li><a class="dropdown-item" href="#">글 삭제</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
   <div>
-    <router-link to="/list">리스트페이지</router-link>
-    <div class="mt-4">
+<!--    <router-link to="/list">리스트페이지</router-link>-->
+    <home/>
+    <div class="board">
+    <div class="boardList">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" @click="$router.push('/list')">12월 4주차 프로젝트</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
+    </div>
+
+    <div class="mainBoard">
       <router-view :blog="blog"/>
     </div>
-
+      <router-link to="/list" v-if="$route.path!='/list'">리스트로 돌아가기</router-link>
   </div>
-
+  </div>
 </template>
 
 <script>
 
 import blog from './assets/blogdata.js'
+import Home from "./components/Home";
 
 export default {
   name: 'App',
   components : {
+    Home
   },
   data(){
     return {
@@ -57,9 +37,6 @@ export default {
   }
   },
   methods : {
-    indexchange(){
-      console.log(this.index);
-    }
   }
 
 }
@@ -72,5 +49,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.board{
+  font-family: "한컴 말랑말랑 Regular";
+}
+.boardList{
+  margin-left: 10pt;
+  margin-right: 10pt;
+  margin-bottom: 30pt;
+}
+.mainBoard{
+  background: cornsilk;
+  margin: 10pt;
+  padding: 10pt;
 }
 </style>
